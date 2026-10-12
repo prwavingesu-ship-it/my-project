@@ -1,0 +1,109 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Zimbabwe Tourism Platform</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #eef2f3;
+    }
+
+    header {
+      background-color: #2e7d32;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #c8e6c9;
+      padding: 10px;
+    }
+
+    nav button {
+      margin: 5px;
+      padding: 10px 15px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    nav button:hover {
+      background-color: #388e3c;
+    }
+
+    main {
+      text-align: center;
+      padding: 20px;
+    }
+
+    main img {
+      width: 80%;
+      max-width: 600px;
+      margin-top: 10px;
+      border-radius: 8px;
+    }
+
+    main p {
+      font-size: 16px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Explore Zimbabwe</h1>
+    <p>Tourism Information Platform</p>
+  </header>
+
+  <nav>
+    
+<button onclick="showInfo('vic')">Victoria Falls</button>
+    <button onclick="showInfo('hwange')">Hwange Park</button>
+    <button onclick="showInfo('kariba')">Lake Kariba</button>
+  </nav>
+
+  <main id="display">
+    <h2>Welcome!</h2>
+    <p>Select a location to view more information.</p>
+  </main>
+
+  <script>
+    function showInfo(place) {
+      const display = document.getElementById("display");
+      let content = "";
+
+      if (place === "vic") {
+        content = `
+          <h2>Victoria Falls</h2>
+          <p>Victoria Falls is one of the world's largest waterfalls, located on the Zambezi River. A popular tourist destination known for adventure sports and natural beauty.</p>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Victoria_Falls_from_Zimbabwe_01.jpg" alt="Victoria Falls">
+        `;
+      } else if (place === "hwange") {
+        content = `
+          <h2>Hwange National Park</h2>
+          <p>Hwange is Zimbabwe's largest game reserve, famous for its elephant population and wide range of wildlife.</p>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/58/Elephant_in_Hwange_National_Park.jpg" alt="Hwange National Park">
+        `;
+      } else if (place === "kariba") {
+        content = `
+          <h2>Lake Kariba</h2>
+        <p>Lake Kariba is the world's largest man-made lake. It's known for houseboat cruises, fishing, and scenic beauty.</p>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/f/f2/Lake_Kariba_from_the_air.jpg" alt="Lake Kariba">
+        `;
+      }
+
+      display.innerHTML = content;
+    }
+  </script>
+
+</body>
+</html>
