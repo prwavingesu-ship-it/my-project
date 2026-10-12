@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Form with Age-Based Institution Field</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 30px;
+    }
+
+    input {
+      margin: 5px 0;
+      padding: 8px;
+      width: 250px;
+    }
+
+    #institutionField {
+      display: none; /* Hidden by default */
+    }
+    #feedback{
+        font-weight: bold;
+        margin-top: 5px;
+    }
+  </style>
+
+  <script>
+    // 🔹 Show or hide the Institution field based on the entered age
+    function toggle() {
+      let age = document.getElementById("age").value;
+      let field = document.getElementById("institution");
+
+      // Convert age to a number
+      age = Number(age);
+
+      // If age is between 17 and 25 inclusive, show the field
+      if (age >= 17 && age <= 25) {
+        field.style.display = "block";
+      } else {
+        field.style.display = "none";
+      }
+      feedback(age);
+    }
+
+    // 🔹 Validate form before submitting
+    function validateForm() {
+      let name = document.getElementById("name").value.trim();
+      let age = document.getElementById("age").value.trim();
+      let institution = document.getElementById("institution").value.trim();
+      // Check if name is filled
+      if (name === "") {
+        alert("Please enter your name!");
+        return false;
+      }
+      // Check if age is a number
+      if (isNaN(age) || age === "") {
+        alert("Please enter a valid age!");
+        return false;
+      }
+      // If institution field is visible (17–25), ensure it's filled
+      if (age >= 17 && age <= 25 && institution === "") {
+        alert("Please enter your institution name!");
+        return false;
+      }
+      // Confirm submission
+      return confirm("Are you sure you want to submit?");
+    }
+
+    // 🔹 Fill the form automatically with sample values
+    function fillForm() {
+      document.getElementById("name").value = "Alice Moyo";
+      document.getElementById("age").value = "20";
+      toggle(); // triggers display of institution field
+      document.getElementById("institution").value = "National University of Science & Tech";
+    }
+
+    // Provide real time feedback message to user
+    function feedback(age){
+        let fB = document.getElementById("feedback");
+
+        if (isNaN(age) || age === 0){
+            fB.textContent = "Please enter a valid age.";
+            fB.style.color = "gray";
+        }
+        else if (age < 17){
+            fB.textContent = "You're below the student age range.";
+            fB.style.color = "orange";
+        }
+        else if (age > 25){
+            fB.textContent = "You're above the student age range.";
+            fB.style.color = "red";
+        }
+        else{
+            fB.textContent = "You are eligible for student registration.";
+            fB.style.color = "green";
+        }
+    }
+  </script>
+</head>
+
+<body>
+  <h2>🎓 Student Information Form</h2>
+  <form onsubmit="return validateForm()">
+    <!-- Name field -->
+    <label>Full Name:</label><br>
+    <input type="text" id="name" placeholder="Enter your name"><br><br>
+
+    <!-- Age field -->
+    <label>Age:</label><br>
+    <input type="text" id="age" placeholder="Enter your age" onkeyup="toggle()"><br><br>
+    <p id="feedback"></p><br>
+
+    <!-- Institution field (appears only if age 17–25) -->
+    <div id="institution">
+      <label>Institution:</label><br>
+      <input type="text" id="institution" placeholder="Enter your institution name"><br><br>
+    </div>
+
+    <!-- Buttons -->
+    <button type="button" onclick="fillForm()">Auto Fill</button>
+    <button type="reset">Reset</button>
+    <button type="submit">Submit</button>
+  </form>
+</body>
+</html>
